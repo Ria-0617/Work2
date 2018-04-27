@@ -3,16 +3,17 @@
 using namespace ci;
 using namespace ci::app;
 
-GameCamera::GameCamera(Vec3f pos) {
+GameCamera::GameCamera(Vec3f targetPos) {
 	fov = 35.f;
 
-	target = pos;
-	position = pos + Vec3f(0.f, 0.f, -8.f);
-	cameraCurrentPosition = position;
+	target = targetPos;
+	offset = Vec3f(0.f, 0.f, -8.f);
+	position = targetPos + offset;
 	rotation = Vec3f(0.f, 0.f, 0.f);
+	cameraCurrentPosition = position;
 	rotationSpeed = 3.f;
 
-	matrix = 0;
+	//matrix = 1;
 };
 
 void GameCamera::SetUp(int windowWidth, int windowHeight) {
@@ -21,7 +22,7 @@ void GameCamera::SetUp(int windowWidth, int windowHeight) {
 	camera.setCenterOfInterestPoint(target);
 }
 
-void GameCamera::UpDate(Vec3f target) {
+void GameCamera::UpDate(Vec3f targetPos) {
 
 	if (joy1.MoveDecision(joy1.GetJoyInfo().dwRpos, joy1.GetJoyInfo().dwZpos)) {
 		rotation += Vec3f(0.f, joy1.StickValue(joy1.GetJoyInfo().dwZpos), 0.f)*rotationSpeed;
@@ -29,10 +30,10 @@ void GameCamera::UpDate(Vec3f target) {
 		matrix = Matrix44f::createRotation(ToRadians(rotation));
 	}
 
-	target = target + matrix * (position - GameCamera::target);
-	Vec3f t = target + matrix * Vec3f(0.f, 0.f, 2.f);
+	cameraCurrentPosition = targetPos + matrix * offset;
+	Vec3f t = targetPos + matrix * Vec3f(0.f, 0.f, 2.f);
 
-	camera.setEyePoint(target + Vec3f(0.f, 5.f, 0.f));
+	camera.setEyePoint(cameraCurrentPosition + Vec3f(0.f, 5.f, 0.f));
 	camera.setCenterOfInterestPoint(t + Vec3f(0.f, 1.f, 0.f));
 }
 

@@ -30,9 +30,7 @@ void TemplateProjectApp::shutdown() {
 
 void TemplateProjectApp::update()
 {
-	//joy1.Debug();
-
-	
+	joy1.Debug();
 
 		// ‹Ê”­ŽË
 	//if (joy1.joy.dwButtons == 0x0020) {    // 32
@@ -58,7 +56,7 @@ void TemplateProjectApp::update()
 	camera1.UpDate(player.GetPos());
 	player.UpDate(camera1.GetMatrix());
 
-	console() << camera1.GetMatrix() << std::endl;
+	//console() << camera1.GetMatrix() << std::endl;
 }
 
 void TemplateProjectApp::draw()

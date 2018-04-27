@@ -12,17 +12,18 @@ private:
 	ci::CameraPersp camera;
 	float fov;
 
-	ci::Vec3f cameraCurrentPosition;
 	ci::Vec3f target;
+	ci::Vec3f offset;
 	ci::Vec3f position;
 	ci::Vec3f rotation;
+	ci::Vec3f cameraCurrentPosition;
 	float rotationSpeed;
 
 	ci::Matrix44f matrix;
 
 	JoyController joy1;
 public:
-	GameCamera(ci::Vec3f pos);
+	GameCamera(ci::Vec3f targetPos);
 
 	ci::Matrix44f GetMatrix() {
 		return this->matrix;
@@ -33,7 +34,7 @@ public:
 	}
 
 	void SetUp(int windowWidth, int windowHeight);
-	void UpDate(ci::Vec3f target);
+	void UpDate(ci::Vec3f targetPos);
 	void Draw();
 
 	void Debug();

@@ -3,6 +3,14 @@
 using namespace ci;
 using namespace ci::app;
 
+JoyController::JoyController() {
+	leftStickValue = Vec3f(0.f, 0.f, 0.f);
+	rightStickValue = Vec3f(0.f, 0.f, 0.f);
+
+	minValue = 0.25f;
+	maxValue = 3452816845.f;
+}
+
 void JoyController::SetUp() {
 
 	joy.dwSize = sizeof JOYINFOEX;
@@ -12,13 +20,12 @@ void JoyController::SetUp() {
 	for (unsigned int i = 0; i < joyGetNumDevs(); ++i) {    //サポートされているジョイスティックの数を返す
 		if (JOYERR_NOERROR == joyGetPosEx(i, &GetJoyInfo()))
 			console() << i << std::endl;
-		
 	}
 }
 
 // 正規化
 float JoyController::StickValue(unsigned long value) {
-	return 1 - 2.f*value / maxValue;
+	return 1 - 2 * value / maxValue;
 }
 
 bool JoyController::MoveDecision(unsigned long valueX, unsigned long valueY) {
@@ -40,13 +47,14 @@ bool JoyController::MoveDecision(unsigned long valueX, unsigned long valueY) {
 // ボタン確認
 void JoyController::Debug() {
 	if (JOYERR_NOERROR == joyGetPosEx(JOYSTICKID1, &GetJoyInfo())) { //0番のジョイスティックの情報を見る
-		console() << "L_Xpos = " << (maxValue / 2.f - GetJoyInfo().dwXpos) / (maxValue * 5.f) << std::endl;
-		console() << "L_Ypos = " << maxValue / 2.0 - GetJoyInfo().dwYpos << std::endl;
-		console() << "R_posX = " << GetJoyInfo().dwZpos - maxValue / 2.0 << std::endl;     // 右スティック横
-		console() << "R_posY = " << maxValue / 2.0 - GetJoyInfo().dwRpos << std::endl;    // 右スティック縦
+		console() << "L_posX = " << StickValue(GetJoyInfo().dwXpos) << std::endl;
+		console() << "L_posY = " << StickValue(GetJoyInfo().dwYpos) << std::endl;
+		console() << "R_posX = " << StickValue(GetJoyInfo().dwZpos) << std::endl;     // 右スティック横
+		console() << "R_posY = " << StickValue(joy.dwRpos) << std::endl;    // 右スティック縦
 		console() << "R2 = " << GetJoyInfo().dwUpos << std::endl;    // R2
 		console() << "L2 = " << GetJoyInfo().dwVpos << std::endl;    // L2
 		console() << "Buttons = " << GetJoyInfo().dwButtons << std::endl;
+		console() << ' ' << std::endl;
 	}
 	else {
 		console() << "エラー" << std::endl;

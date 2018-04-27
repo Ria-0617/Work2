@@ -20,13 +20,7 @@ private:
 	float maxValue;
 
 public:
-	JoyController() {
-		leftStickValue = ci::Vec3f(0.f, 0.f, 0.f);
-		rightStickValue = ci::Vec3f(0.f, 0.f, 0.f);
-
-		minValue = 0.05f;
-		maxValue = 65535.5f;
-	};
+	JoyController();
 
 	/*JOYINFOEX SetJoyInfo(JOYINFOEX joyInfo) {
 		this->joy = joyInfo;
