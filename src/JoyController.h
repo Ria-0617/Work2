@@ -11,13 +11,11 @@
 
 class JoyController {
 private:
-	JOYINFOEX joy;
-
-	ci::Vec3f leftStickValue;
-	ci::Vec3f rightStickValue;
-
 	float minValue;
 	float maxValue;
+
+protected:
+	JOYINFOEX joy;
 
 public:
 	JoyController();
@@ -30,10 +28,6 @@ public:
 		joy = obj.joy;
 		return *this;
 	}*/
-
-	JOYINFOEX GetJoyInfo() {
-		return this->joy;
-	};
 
 	void SetUp();
 

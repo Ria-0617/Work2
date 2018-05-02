@@ -3,14 +3,13 @@
 #include "cinder/gl/gl.h"
 #include "JoyController.h"
 
-class Player {
+class Player :public JoyController{
 private:
 	ci::Vec3f position;
 	ci::Vec3f prevPosition;
 	ci::Vec3f rotation;
 	float speed;
 
-	JoyController joy1;
 public:
 	Player();
 

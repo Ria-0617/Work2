@@ -12,16 +12,12 @@ void TemplateProjectApp::setup()
 	joy1.SetUp();
 	camera1.SetUp(getWindowWidth(),getWindowHeight());
 
-	console() << player.GetPos() << std::endl;
-
 	ui_camera = CameraOrtho(0.f, (float)getWindowWidth(), (float)getWindowHeight(), 0.f, -1.f, 1.f);
 	ui_camera.setEyePoint(Vec3f(0.f, 0.f, 0.f));
 	ui_camera.setCenterOfInterestPoint(Vec3f(0.f, 0.f, -1.f));
 
 	gl::enableAlphaBlending();
 	gl::enable(GL_COLOR_MATERIAL);
-
-	joy1.SetUp();
 }
 
 void TemplateProjectApp::shutdown() {
@@ -30,7 +26,7 @@ void TemplateProjectApp::shutdown() {
 
 void TemplateProjectApp::update()
 {
-	joy1.Debug();
+	//joy1.Debug();
 
 		// ‹Ê”­ŽË
 	//if (joy1.joy.dwButtons == 0x0020) {    // 32

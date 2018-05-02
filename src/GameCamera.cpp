@@ -24,8 +24,8 @@ void GameCamera::SetUp(int windowWidth, int windowHeight) {
 
 void GameCamera::UpDate(Vec3f targetPos) {
 
-	if (joy1.MoveDecision(joy1.GetJoyInfo().dwRpos, joy1.GetJoyInfo().dwZpos)) {
-		rotation += Vec3f(0.f, joy1.StickValue(joy1.GetJoyInfo().dwZpos), 0.f)*rotationSpeed;
+	if (MoveDecision(joy.dwRpos, joy.dwZpos)) {
+		rotation += Vec3f(0.f, StickValue(joy.dwZpos), 0.f)*rotationSpeed;
 
 		matrix = Matrix44f::createRotation(ToRadians(rotation));
 	}

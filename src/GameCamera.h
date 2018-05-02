@@ -7,7 +7,7 @@
 #include "JoyController.h"
 #include "Player.h"
 
-class GameCamera {
+class GameCamera:public JoyController {
 private:
 	ci::CameraPersp camera;
 	float fov;
@@ -21,7 +21,6 @@ private:
 
 	ci::Matrix44f matrix;
 
-	JoyController joy1;
 public:
 	GameCamera(ci::Vec3f targetPos);
 

@@ -20,8 +20,8 @@ void Player::UpDate(Matrix44f m) {
 	}
 
 	// ˆÚ“®
-	if (joy1.MoveDecision(joy1.GetJoyInfo().dwXpos, joy1.GetJoyInfo().dwYpos))
-		position += m * Vec3f(joy1.StickValue(joy1.GetJoyInfo().dwXpos), 0.f, joy1.StickValue(joy1.GetJoyInfo().dwYpos))  * speed;
+	if (MoveDecision(joy.dwXpos&255, joy.dwYpos))
+		position += m * Vec3f(StickValue(joy.dwXpos), 0.f, StickValue(joy.dwYpos))  * speed;
 }
 
 void Player::Draw() {
