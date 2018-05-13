@@ -12,8 +12,6 @@ GameCamera::GameCamera(Vec3f targetPos) {
 	rotation = Vec3f(0.f, 0.f, 0.f);
 	cameraCurrentPosition = position;
 	rotationSpeed = 3.f;
-
-	//matrix = 1;
 };
 
 void GameCamera::SetUp(int windowWidth, int windowHeight) {
@@ -25,9 +23,11 @@ void GameCamera::SetUp(int windowWidth, int windowHeight) {
 void GameCamera::UpDate(Vec3f targetPos) {
 
 	if (MoveDecision(joy.dwRpos, joy.dwZpos)) {
-		rotation += Vec3f(0.f, StickValue(joy.dwZpos), 0.f)*rotationSpeed;
+		rotation += Vec3f(StickValue(joy.dwRpos), StickValue(joy.dwZpos), 0.f)*rotationSpeed;
 
 		matrix = Matrix44f::createRotation(ToRadians(rotation));
+
+		console() << matrix << std::endl;
 	}
 
 	cameraCurrentPosition = targetPos + matrix * offset;

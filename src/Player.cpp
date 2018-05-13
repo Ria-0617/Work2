@@ -6,37 +6,49 @@ using namespace ci::app;
 Player::Player() {
 	position = Vec3f(0.f, 0.f, 0.f);
 	prevPosition = position;
-	rotation = Vec3f(0.f, 0.f, 0.f);
+	direction = Vec3f(0.f, 0.f, 0.f);
 
 	speed = 0.3f;
 };
 
 void Player::UpDate(Matrix44f m) {
-	
+
 	auto diff = position - prevPosition;
 	if (diff != Vec3f(0.f, 0.f, 0.f)) {
-		rotation.y = atan2f(diff.x, diff.z) * 180.f / (float)M_PI;
+		direction.y = atan2f(diff.x, diff.z) * 180.f / (float)M_PI;
 		prevPosition = position;
 	}
 
 	// 移動
-	if (MoveDecision(joy.dwXpos&255, joy.dwYpos))
+	if (MoveDecision(joy.dwXpos, joy.dwYpos))
 		position += m * Vec3f(StickValue(joy.dwXpos), 0.f, StickValue(joy.dwYpos))  * speed;
+
+	if (IsPressedButton(R1))
+		shots.push_back(Shot(position));
+
+	for (std::list<Shot>::iterator iter = shots.begin(); iter != shots.end();) {
+		iter->UpDate(m);
+		if (iter->isDead())
+			iter = shots.erase(iter);
+		else
+			++iter;
+	}
 }
 
 void Player::Draw() {
 	// プレイヤー
 	gl::pushModelView();
 	gl::translate(position);
-	gl::rotate(rotation);
+	gl::rotate(direction);
 	gl::color(Color(1.f, 1.f, 1.f));
 	gl::drawColorCube(Vec3f(0.f, 0.f, 0.f), Vec3f(1.f, 1.f, 1.f));
 	gl::popModelView();
+
+	// 玉
+	for (std::list<Shot>::iterator iter = shots.begin(); iter != shots.end(); ++iter) {
+		iter->Draw();
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// デバッグ用
-void Player::Debug() {
-	console() << position << std::endl;
-}

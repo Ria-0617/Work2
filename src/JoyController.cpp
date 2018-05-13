@@ -35,7 +35,18 @@ bool JoyController::MoveDecision(unsigned long valueX, unsigned long valueY) {
 			//console() << joy.dwXpos << std::endl;
 			return true;
 		}
-		else 
+		else
+			return false;
+	}
+	else
+		return false;
+}
+
+bool JoyController::IsPressedButton(unsigned long buttonNum) {
+	if (JOYERR_NOERROR == joyGetPosEx(JOYSTICKID1, &joy)) {
+		if (joy.dwButtons == buttonNum)
+			return true;
+		else
 			return false;
 	}
 	else
