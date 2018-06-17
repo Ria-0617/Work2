@@ -8,18 +8,19 @@
 #include "cinder\ImageIo.h"
 #include "cinder\gl\Texture.h"
 #include "cinder\ObjLoader.h"
-#include "JoyController.h"
 
 #include "JoyController.h"
 #include "Player.h"
 #include "GameCamera.h"
+#include "Boid.h"
 
-#include <vector>
+#include <list>
 
 class TemplateProjectApp : public ci::app::AppNative {
 	JoyController joy1;
 	Player player;
 	GameCamera camera1 = GameCamera(player.GetPos());
+	std::list<Boid> boids;
 
 	ci::CameraOrtho ui_camera;
 

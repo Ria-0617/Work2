@@ -28,29 +28,22 @@ float JoyController::StickValue(unsigned long value) {
 
 bool JoyController::MoveDecision(unsigned long valueX, unsigned long valueY) {
 	//0番のジョイスティックの情報を見る
-	if (JOYERR_NOERROR == joyGetPosEx(JOYSTICKID1, &joy)) {
-		if (StickValue(valueX) > minValue || StickValue(valueX) < -minValue ||
-			StickValue(valueY) > minValue || StickValue(valueY) < -minValue) {
-			//console() << StickValue(valueX) << std::endl;
-			//console() << joy.dwXpos << std::endl;
-			return true;
-		}
-		else
-			return false;
+	if (JOYERR_NOERROR != joyGetPosEx(JOYSTICKID1, &joy)) return false;
+
+	if (StickValue(valueX) > minValue || StickValue(valueX) < -minValue ||
+		StickValue(valueY) > minValue || StickValue(valueY) < -minValue) {
+		//console() << StickValue(valueX) << std::endl;
+		//console() << joy.dwXpos << std::endl;
+		return true;
 	}
 	else
 		return false;
 }
 
 bool JoyController::IsPressedButton(unsigned long buttonNum) {
-	if (JOYERR_NOERROR == joyGetPosEx(JOYSTICKID1, &joy)) {
-		if (joy.dwButtons == buttonNum)
-			return true;
-		else
-			return false;
-	}
-	else
-		return false;
+	if (JOYERR_NOERROR != joyGetPosEx(JOYSTICKID1, &joy)) return false;
+
+	return joy.dwButtons == buttonNum ? true : false;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////

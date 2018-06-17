@@ -13,6 +13,8 @@ private:
 	ci::Vec3f direction;
 	float speed;
 
+	ci::Vec3f scale;
+
 	std::list<Shot> shots;
 
 public:

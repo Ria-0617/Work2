@@ -8,6 +8,8 @@ Player::Player() {
 	prevPosition = position;
 	direction = Vec3f(0.f, 0.f, 0.f);
 
+	scale = Vec3f(1.f, 1.f, 1.f);
+
 	speed = 0.3f;
 };
 
@@ -41,7 +43,7 @@ void Player::Draw() {
 	gl::translate(position);
 	gl::rotate(direction);
 	gl::color(Color(1.f, 1.f, 1.f));
-	gl::drawColorCube(Vec3f(0.f, 0.f, 0.f), Vec3f(1.f, 1.f, 1.f));
+	gl::drawColorCube(Vec3f(0.f, 0.f, 0.f), scale);
 	gl::popModelView();
 
 	// ‹Ê

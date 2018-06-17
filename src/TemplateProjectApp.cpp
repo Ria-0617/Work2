@@ -9,8 +9,12 @@ void TemplateProjectApp::prepareSettings(Settings* settings) {
 
 void TemplateProjectApp::setup()
 {
-	joy1.SetUp();
+	//joy1.SetUp();
 	camera1.SetUp(getWindowWidth(),getWindowHeight());
+
+	for (int i = 1; i < 50; ++i) {
+		boids.push_back(Boid());
+	}
 
 	ui_camera = CameraOrtho(0.f, (float)getWindowWidth(), (float)getWindowHeight(), 0.f, -1.f, 1.f);
 	ui_camera.setEyePoint(Vec3f(0.f, 0.f, 0.f));
@@ -26,31 +30,13 @@ void TemplateProjectApp::shutdown() {
 
 void TemplateProjectApp::update()
 {
-	//joy1.Debug();
-
-		// ‹Ê”­ŽË
-	//if (joy1.joy.dwButtons == 0x0020) {    // 32
-	//	Matrix44f m = Matrix44f::createRotation(ToRadians(playerRot));
-
-	//	ball.position = playerPos;
-	//	ball.v = m.transformVec(Vec3f(0.f, 0.f, 0.5f));
-	//	ball.time = 10;
-	//	balls.push_back(ball);
-	//}
-
-	//Ray ray(playerPos, Vec3f(0.f, -1.f, 0.f));
-	//
-	//float z;
-	//if (ray.calcPlaneIntersection(Vec3f(0.f, -5.f, 0.f), Vec3f(0.f, 1.f, 0.f), &z)) {
-	//	Vec3f p = ray.calcPosition(z);
-	//	playerPos.y = p.y + 0.5f;
-	//}
-	//else {
-	//	playerPos -= m * Vec3f(0.f, 0.01f, 0.f);
-	//}
-
 	camera1.UpDate(player.GetPos());
 	player.UpDate(camera1.GetMatrix());
+
+	for (auto itr = boids.begin(); itr != boids.end(); ++itr) {
+		itr->Move(boids);
+		itr->MoveLimit();
+	}
 
 	//console() << camera1.GetMatrix() << std::endl;
 }
@@ -79,9 +65,11 @@ void TemplateProjectApp::draw()
 	}
 #endif	
 
-#pragma region Player
 	player.Draw();
-#pragma endregion
+
+	for (auto itr = boids.begin(); itr != boids.end(); ++itr) {
+		itr->Draw();
+	}
 
 #pragma region disable
 	gl::disableDepthRead();
