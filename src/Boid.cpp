@@ -4,17 +4,15 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-Boid::Boid() {
+Boid::Boid() :radius(1.f), viewAngleRange(toRadians(50.f)), viewDistanceRange(2.f) {
 	position = Vec3f(randFloat(-50.f, 50.f), randFloat(-50.f, 50.f), randFloat(-50.f, 50.f));
 
 	angle = Vec3f(0, 0, randFloat(0.f, 360.f)) * (float)M_PI / 180.0f;
 	direction = Matrix44f::createRotation(angle) * Vec3f(0.f, 1.f, 0.f);
 
-	radius = 1.f;
-
-	viewAngleRange = toRadians(50.f);
-	
-	viewDistanceRange = 2.f;
+	//radius = 1.f;
+	//viewAngleRange = toRadians(50.f);
+	//viewDistanceRange = 2.f;
 }
 
 bool Boid::OutOfViewRange(Boid& boid, float viewAngleRange, float viewDistanceRange) {

@@ -11,11 +11,11 @@ class Boid {
 	ci::Vec3f angle;
 	ci::Vec3f direction;
 
-	float radius;
+	const float radius;
 	
 
-	float viewAngleRange;
-	float viewDistanceRange;
+	const float viewAngleRange;
+	const float viewDistanceRange;
 
 	bool OutOfViewRange(Boid&, float, float);
 

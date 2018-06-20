@@ -11,8 +11,8 @@
 
 class JoyController {
 private:
-	float minValue;
-	float maxValue;
+	const float minValue;
+	const float maxValue;
 
 protected:
 	JOYINFOEX joy;

@@ -3,12 +3,10 @@
 using namespace ci;
 using namespace ci::app;
 
-Player::Player() {
+Player::Player() :scale(Vec3f(1.f, 1.f, 1.f)) {
 	position = Vec3f(0.f, 0.f, 0.f);
 	prevPosition = position;
 	direction = Vec3f(0.f, 0.f, 0.f);
-
-	scale = Vec3f(1.f, 1.f, 1.f);
 
 	speed = 0.3f;
 };

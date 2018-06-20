@@ -4,9 +4,8 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-JoyController::JoyController() {
-	minValue = 0.25f;
-	maxValue = 255.f;
+JoyController::JoyController():minValue(0.25f), maxValue(255.f) {
+
 }
 
 void JoyController::SetUp() {
@@ -32,8 +31,6 @@ bool JoyController::MoveDecision(unsigned long valueX, unsigned long valueY) {
 
 	if (StickValue(valueX) > minValue || StickValue(valueX) < -minValue ||
 		StickValue(valueY) > minValue || StickValue(valueY) < -minValue) {
-		//console() << StickValue(valueX) << std::endl;
-		//console() << joy.dwXpos << std::endl;
 		return true;
 	}
 	else
