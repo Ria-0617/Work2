@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
     <ClInclude Include="..\src\Boid.h" />
+    <ClInclude Include="..\src\Func.h" />
     <ClInclude Include="..\src\GameCamera.h" />
     <ClInclude Include="..\src\JoyController.h" />
     <ClInclude Include="..\src\Player.h" />

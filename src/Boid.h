@@ -4,6 +4,7 @@
 #include "cinder/gl/gl.h"
 #include "cinder/Rand.h"
 #include <list>
+#include "Func.h"
 
 class Boid {
 	ci::Vec3f position;

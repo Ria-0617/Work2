@@ -15,7 +15,7 @@ void Player::UpDate(Matrix44f m) {
 
 	auto diff = position - prevPosition;
 	if (diff != Vec3f(0.f, 0.f, 0.f)) {
-		direction.y = atan2f(diff.x, diff.z) * 180.f / (float)M_PI;
+		direction.y = toDegrees(atan2f(diff.x, diff.z));
 		prevPosition = position;
 	}
 
@@ -26,7 +26,7 @@ void Player::UpDate(Matrix44f m) {
 	if (IsPressedButton(R1))
 		shots.push_back(Shot(position));
 
-	for (std::list<Shot>::iterator iter = shots.begin(); iter != shots.end();) {
+	for (auto iter = shots.begin(); iter != shots.end();) {
 		iter->UpDate(m);
 		if (iter->isDead())
 			iter = shots.erase(iter);
@@ -45,7 +45,7 @@ void Player::Draw() {
 	gl::popModelView();
 
 	// ‹Ê
-	for (std::list<Shot>::iterator iter = shots.begin(); iter != shots.end(); ++iter) {
+	for (auto iter = shots.begin(); iter != shots.end(); ++iter) {
 		iter->Draw();
 	}
 

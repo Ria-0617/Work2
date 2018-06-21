@@ -6,6 +6,7 @@
 #include "cinder\Camera.h"
 #include "JoyController.h"
 #include "Player.h"
+#include "Func.h"
 
 class GameCamera:public JoyController {
 private:
@@ -18,6 +19,7 @@ private:
 	ci::Vec3f rotation;
 	ci::Vec3f cameraCurrentPosition;
 	float rotationSpeed;
+	float limitAngle;
 
 	ci::Matrix44f matrix;
 
@@ -38,5 +40,3 @@ public:
 
 	void Debug();
 };
-
-ci::Vec3f ToRadians(const ci::Vec3f& degrees);

@@ -3,7 +3,6 @@
 #pragma comment(lib,"winmm.lib")
 
 #include "cinder/app/AppNative.h"
-#include "cinder/gl/gl.h"
 
 #include <iostream>
 #include <Windows.h>
@@ -28,15 +27,6 @@ protected:
 
 public:
 	JoyController();
-
-	/*JOYINFOEX SetJoyInfo(JOYINFOEX joyInfo) {
-		this->joy = joyInfo;
-	}
-
-	JoyController& operator=(const JoyController &obj) {
-		joy = obj.joy;
-		return *this;
-	}*/
 
 	void SetUp();
 

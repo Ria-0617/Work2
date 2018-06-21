@@ -9,10 +9,9 @@ void TemplateProjectApp::prepareSettings(Settings* settings) {
 
 void TemplateProjectApp::setup()
 {
-	//joy1.SetUp();
 	camera1.SetUp(getWindowWidth(),getWindowHeight());
 
-	for (int i = 1; i < 50; ++i) {
+	for (int i = 1; i < 75; ++i) {
 		boids.push_back(Boid());
 	}
 

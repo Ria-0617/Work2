@@ -12,6 +12,7 @@ GameCamera::GameCamera(Vec3f targetPos) {
 	rotation = Vec3f(0.f, 0.f, 0.f);
 	cameraCurrentPosition = position;
 	rotationSpeed = 3.f;
+	limitAngle = 45.f;
 };
 
 void GameCamera::SetUp(int windowWidth, int windowHeight) {
@@ -24,10 +25,12 @@ void GameCamera::UpDate(Vec3f targetPos) {
 
 	if (MoveDecision(joy.dwRpos, joy.dwZpos)) {
 		rotation += Vec3f(StickValue(joy.dwRpos), StickValue(joy.dwZpos), 0.f)*rotationSpeed;
+		
+		rotation.x = MyFanc::Clamp(rotation.x, -limitAngle, limitAngle);
 
-		matrix = Matrix44f::createRotation(ToRadians(rotation));
+		matrix = Matrix44f::createRotation(MyFanc::ToRadians(rotation));
 
-		console() << matrix << std::endl;
+
 	}
 
 	cameraCurrentPosition = targetPos + matrix * offset;
@@ -39,10 +42,6 @@ void GameCamera::UpDate(Vec3f targetPos) {
 
 void GameCamera::Draw() {
 	gl::setMatrices(camera);
-}
-
-Vec3f ToRadians(const Vec3f& degrees) {
-	return degrees * M_PI / 180.f;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////

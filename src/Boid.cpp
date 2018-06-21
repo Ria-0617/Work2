@@ -4,15 +4,11 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-Boid::Boid() :radius(1.f), viewAngleRange(toRadians(50.f)), viewDistanceRange(2.f) {
+Boid::Boid() :radius(1.f), viewAngleRange(toRadians(45.f)), viewDistanceRange(5.f) {
 	position = Vec3f(randFloat(-50.f, 50.f), randFloat(-50.f, 50.f), randFloat(-50.f, 50.f));
 
-	angle = Vec3f(0, 0, randFloat(0.f, 360.f)) * (float)M_PI / 180.0f;
+	angle = MyFanc::ToRadians(Vec3f(0, 0, randFloat(0.f, 360.f)));
 	direction = Matrix44f::createRotation(angle) * Vec3f(0.f, 1.f, 0.f);
-
-	//radius = 1.f;
-	//viewAngleRange = toRadians(50.f);
-	//viewDistanceRange = 2.f;
 }
 
 bool Boid::OutOfViewRange(Boid& boid, float viewAngleRange, float viewDistanceRange) {
@@ -49,7 +45,7 @@ Vec3f Boid::Alignment(list<Boid>&boids) {
 
 		ralativeAngle += itr->angle;
 
-		neiborCount++;
+		++neiborCount;
 	}
 
 	if (neiborCount > 0) {
@@ -72,14 +68,14 @@ Vec3f Boid::Cohesion(list<Boid>&boids) {
 		if (OutOfViewRange(*itr, viewAngleRange, viewDistanceRange))continue;
 
 		centerPos += itr->position;
-		neiborCount++;
+		++neiborCount;
 	}
-
+	
 	if (neiborCount > 0) {
 		centerPos /= neiborCount;
 	}
 
-	return (centerPos - position).safeNormalized() * 0.1f;
+	return (centerPos - position).safeNormalized();
 }
 
 void Boid::Move(list<Boid>& boids) {
@@ -107,7 +103,6 @@ void Boid::MoveLimit() {
 		position.z -= 100;
 	if (position.z < -50)
 		position.z += 100;
-
 }
 
 void Boid::Draw() {
