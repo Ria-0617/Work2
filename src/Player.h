@@ -3,7 +3,6 @@
 #include "cinder/gl/gl.h"
 #include "JoyController.h"
 
-#include "Shot.h"
 #include <list>
 
 class Player :public JoyController{
@@ -14,14 +13,11 @@ private:
 	float speed;
 
 	const ci::Vec3f scale;
-
-	std::list<Shot> shots;
-
 public:
 	Player();
 
 	ci::Vec3f GetPos() {
-		return this->position;
+		return position;
 	};
 
 	void UpDate(ci::Matrix44f m);

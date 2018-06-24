@@ -29,15 +29,13 @@ void GameCamera::UpDate(Vec3f targetPos) {
 		rotation.x = MyFanc::Clamp(rotation.x, -limitAngle, limitAngle);
 
 		matrix = Matrix44f::createRotation(MyFanc::ToRadians(rotation));
-
-
 	}
 
 	cameraCurrentPosition = targetPos + matrix * offset;
-	Vec3f t = targetPos + matrix * Vec3f(0.f, 0.f, 2.f);
+	Vec3f t = targetPos + matrix * Vec3f(0.f, 0.f, 1.f);
 
-	camera.setEyePoint(cameraCurrentPosition + Vec3f(0.f, 5.f, 0.f));
-	camera.setCenterOfInterestPoint(t + Vec3f(0.f, 1.f, 0.f));
+	camera.setEyePoint(cameraCurrentPosition + Vec3f(0.f, 2.f, 0.f));
+	camera.setCenterOfInterestPoint(t + Vec3f(0.f, 2.f, 0.f));
 }
 
 void GameCamera::Draw() {

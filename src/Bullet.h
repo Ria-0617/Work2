@@ -3,19 +3,18 @@
 #include "cinder/app/AppNative.h"
 #include "cinder/gl/gl.h"
 
-class Shot {
+class Bullet {
 private:
 	ci::Vec3f position;
 	ci::Matrix44f direction;
-	float radius;
-	float speed;
+	const float radius;
+	const float speed;
 	int surviveTime;
 
 public:
-	Shot(ci::Vec3f playerPos);
+	Bullet(ci::Vec3f playerPos, ci::Matrix44f m);
 
-
-	void UpDate(ci::Matrix44f m);
+	void UpDate();
 	void Draw();
 	bool isDead();
 };

@@ -37,6 +37,17 @@ void TemplateProjectApp::update()
 		itr->MoveLimit();
 	}
 
+	if (IsPressedButton(R1))
+		bullets.push_back(Bullet(player.GetPos(),camera1.GetMatrix()));
+
+	for (auto iter = bullets.begin(); iter != bullets.end();) {
+		iter->UpDate();
+		if (iter->isDead())
+			iter = bullets.erase(iter);
+		else
+			++iter;
+	}
+
 	//console() << camera1.GetMatrix() << std::endl;
 }
 
@@ -68,6 +79,11 @@ void TemplateProjectApp::draw()
 
 	for (auto itr = boids.begin(); itr != boids.end(); ++itr) {
 		itr->Draw();
+	}
+
+	// ‹Ê
+	for (auto iter = bullets.begin(); iter != bullets.end(); ++iter) {
+		iter->Draw();
 	}
 
 #pragma region disable

@@ -13,14 +13,15 @@
 #include "Player.h"
 #include "GameCamera.h"
 #include "Boid.h"
+#include "Bullet.h"
 
 #include <list>
 
-class TemplateProjectApp : public ci::app::AppNative {
-	JoyController joy1;
+class TemplateProjectApp : public ci::app::AppNative,JoyController {
 	Player player;
 	GameCamera camera1 = GameCamera(player.GetPos());
 	std::list<Boid> boids;
+	std::list<Bullet> bullets;
 
 	ci::CameraOrtho ui_camera;
 
