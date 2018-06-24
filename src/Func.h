@@ -3,7 +3,7 @@
 
 namespace MyFanc {
 	template<typename T>
-	static T Clamp(T value, T minValue, T maxValue) {
+	T Clamp(T value, T minValue, T maxValue) {
 		return value > maxValue ? maxValue : (value < minValue ? minValue : value);
 	}
 

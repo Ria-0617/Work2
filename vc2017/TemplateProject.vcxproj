@@ -108,20 +108,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Boid.cpp" />
+    <ClCompile Include="..\src\Bullet.cpp" />
     <ClCompile Include="..\src\GameCamera.cpp" />
+    <ClCompile Include="..\src\GameManager.cpp" />
     <ClCompile Include="..\src\JoyController.cpp" />
     <ClCompile Include="..\src\Player.cpp" />
-    <ClCompile Include="..\src\Shot.cpp" />
     <ClCompile Include="..\src\TemplateProjectApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
     <ClInclude Include="..\src\Boid.h" />
+    <ClInclude Include="..\src\Bullet.h" />
     <ClInclude Include="..\src\Func.h" />
     <ClInclude Include="..\src\GameCamera.h" />
+    <ClInclude Include="..\src\GameManager.h" />
     <ClInclude Include="..\src\JoyController.h" />
     <ClInclude Include="..\src\Player.h" />
-    <ClInclude Include="..\src\Shot.h" />
     <ClInclude Include="..\src\TemplateProjectApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

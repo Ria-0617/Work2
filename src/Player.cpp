@@ -22,17 +22,6 @@ void Player::UpDate(Matrix44f m) {
 	// ˆÚ“®
 	if (MoveDecision(joy.dwXpos, joy.dwYpos))
 		position += m * Vec3f(StickValue(joy.dwXpos), 0.f, StickValue(joy.dwYpos))  * speed;
-
-	if (IsPressedButton(R1))
-		shots.push_back(Shot(position));
-
-	for (auto iter = shots.begin(); iter != shots.end();) {
-		iter->UpDate(m);
-		if (iter->isDead())
-			iter = shots.erase(iter);
-		else
-			++iter;
-	}
 }
 
 void Player::Draw() {
@@ -43,12 +32,6 @@ void Player::Draw() {
 	gl::color(Color(1.f, 1.f, 1.f));
 	gl::drawColorCube(Vec3f(0.f, 0.f, 0.f), scale);
 	gl::popModelView();
-
-	// ‹Ê
-	for (auto iter = shots.begin(); iter != shots.end(); ++iter) {
-		iter->Draw();
-	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

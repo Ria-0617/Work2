@@ -2,7 +2,6 @@
 
 using namespace ci;
 using namespace ci::app;
-using namespace std;
 
 JoyController::JoyController():minValue(0.25f), maxValue(255.f) {
 

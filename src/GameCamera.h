@@ -27,7 +27,7 @@ public:
 	GameCamera(ci::Vec3f targetPos);
 
 	ci::Matrix44f GetMatrix() {
-		return this->matrix;
+		return matrix;
 	};
 
 	ci::Vec3f GetPosition() {
