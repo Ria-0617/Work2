@@ -36,8 +36,6 @@ void TemplateProjectApp::update()
 		itr->Move(boids);
 		itr->MoveLimit();
 	}
-<<<<<<< HEAD
-=======
 
 	if (IsPressedButton(R1))
 		bullets.push_back(Bullet(player.GetPos(),camera1.GetMatrix()));
@@ -51,7 +49,6 @@ void TemplateProjectApp::update()
 	}
 
 	//console() << camera1.GetMatrix() << std::endl;
->>>>>>> 978f49d8fb066a14215cfe808229b64f42e40f43
 }
 
 void TemplateProjectApp::draw()
