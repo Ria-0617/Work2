@@ -28,5 +28,6 @@ public:
 	Boid();
 	void Move(std::list<Boid>&);
 	void MoveLimit();
+	void UpDate(ci::Vec3f pos,float rad);
 	void Draw();
 };

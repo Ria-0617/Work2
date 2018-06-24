@@ -29,8 +29,6 @@ void GameCamera::UpDate(Vec3f targetPos) {
 		rotation.x = MyFanc::Clamp(rotation.x, -limitAngle, limitAngle);
 
 		matrix = Matrix44f::createRotation(MyFanc::ToRadians(rotation));
-
-
 	}
 
 	cameraCurrentPosition = targetPos + matrix * offset;

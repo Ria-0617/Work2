@@ -26,10 +26,8 @@ Vec3f Boid::Separate(list<Boid>&boids) {
 
 	for (auto itr = boids.begin(); itr != boids.end(); ++itr) {
 		if (position.distance(itr->position) > viewDistanceRange) continue;
-		//if (OutOfViewRange(*itr, viewAngleRange, viewDistanceRange))continue;
 
 		toAgent = (position - itr->position).safeNormalized();
-
 		relativePosition += toAgent;
 	}
 
@@ -105,7 +103,13 @@ void Boid::MoveLimit() {
 		position.z += 100;
 }
 
+void Boid::UpDate(ci::Vec3f pos, float rad) {
+	if (MyFanc::CircleCollider(position, radius, pos, rad)) {
+		MyFanc::Console("AAA");
+	}
+}
+
 void Boid::Draw() {
 	gl::drawSphere(position, radius);
-	gl::drawLine(position, position + direction * 10);
+	gl::drawLine(position, position + direction * 10.f);
 }

@@ -36,8 +36,6 @@ void TemplateProjectApp::update()
 		itr->Move(boids);
 		itr->MoveLimit();
 	}
-
-	//console() << camera1.GetMatrix() << std::endl;
 }
 
 void TemplateProjectApp::draw()

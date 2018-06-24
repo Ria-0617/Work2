@@ -1,9 +1,10 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
-#include "JoyController.h"
 
+#include "JoyController.h"
 #include "Shot.h"
+
 #include <list>
 
 class Player :public JoyController{
@@ -21,7 +22,7 @@ public:
 	Player();
 
 	ci::Vec3f GetPos() {
-		return this->position;
+		return position;
 	};
 
 	void UpDate(ci::Matrix44f m);

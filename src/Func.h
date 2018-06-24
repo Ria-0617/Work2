@@ -3,7 +3,6 @@
 
 namespace MyFanc {
 	template<typename T>
-
 	static T Clamp(T value, T minValue, T maxValue) {
 		return value > maxValue ? maxValue : (value < minValue ? minValue : value);
 	}
@@ -19,5 +18,9 @@ namespace MyFanc {
 
 	inline ci::Vec3f ToDegrees(const ci::Vec3f& radians) {
 		return radians * 180.f / (float)M_PI;
+	}
+
+	inline bool CircleCollider(ci::Vec3f objPos,float radius, ci::Vec3f objPos2, float radius2) {
+		return objPos.distance(objPos2) < radius + radius2 ? true : false;
 	}
 }
