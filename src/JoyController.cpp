@@ -3,7 +3,7 @@
 using namespace ci;
 using namespace ci::app;
 
-JoyController::JoyController():minValue(0.25f), maxValue(255.f) {
+JoyController::JoyController(): maxValue(255.f) {
 
 }
 
@@ -24,7 +24,7 @@ float JoyController::StickValue(unsigned long value) {
 	return 1 - 2 * (value & 0xff) / maxValue;
 }
 
-bool JoyController::MoveDecision(unsigned long valueX, unsigned long valueY) {
+bool JoyController::IsMove(float minValue, unsigned long valueX, unsigned long valueY) {
 	//0番のジョイスティックの情報を見る
 	if (JOYERR_NOERROR != joyGetPosEx(JOYSTICKID1, &joy)) return false;
 

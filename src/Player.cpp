@@ -20,7 +20,7 @@ void Player::UpDate(Matrix44f m) {
 	}
 
 	// ˆÚ“®
-	if (MoveDecision(joy.dwXpos, joy.dwYpos))
+	if (IsMove(/*minValue = */0.25f,joy.dwXpos, joy.dwYpos))
 		position += m * Vec3f(StickValue(joy.dwXpos), 0.f, StickValue(joy.dwYpos))  * speed;
 }
 

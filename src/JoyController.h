@@ -10,7 +10,6 @@
 
 class JoyController {
 private:
-	const float minValue;
 	const float maxValue;
 
 protected:
@@ -31,7 +30,7 @@ public:
 	void SetUp();
 
 	float StickValue(unsigned long value);
-	bool MoveDecision(unsigned long valueX, unsigned long valueY);
+	bool IsMove(float minValue, unsigned long valueX, unsigned long valueY);
 	bool IsPressedButton(unsigned long buttonNum);
 
 	void Debug();
