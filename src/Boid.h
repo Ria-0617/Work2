@@ -13,7 +13,6 @@ class Boid {
 	ci::Vec3f direction;
 
 	const float radius;
-	
 
 	const float viewAngleRange;
 	const float viewDistanceRange;
@@ -26,7 +25,17 @@ class Boid {
 
 public:
 	Boid();
+	Boid(ci::Vec3f);
 	void Move(std::list<Boid>&);
+
+	ci::Vec3f GetPosition() {
+		return position;
+	}
+
+	float GetRadius() {
+		return radius;
+	}
+
 	void MoveLimit();
 	void UpDate(ci::Vec3f pos,float rad);
 	void Draw();

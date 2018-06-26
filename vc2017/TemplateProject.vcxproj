@@ -114,6 +114,7 @@
     <ClCompile Include="..\src\JoyController.cpp" />
     <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\TemplateProjectApp.cpp" />
+    <ClCompile Include="..\src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
@@ -125,6 +126,7 @@
     <ClInclude Include="..\src\JoyController.h" />
     <ClInclude Include="..\src\Player.h" />
     <ClInclude Include="..\src\TemplateProjectApp.h" />
+    <ClInclude Include="..\src\UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

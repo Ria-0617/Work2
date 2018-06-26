@@ -10,23 +10,28 @@
 #include "cinder\ObjLoader.h"
 
 #include "JoyController.h"
-#include "Player.h"
 #include "GameCamera.h"
-#include "Boid.h"
+#include "Player.h"
 #include "Bullet.h"
+#include "Boid.h"
+#include "UI.h"
+
+#include "Func.h"
 
 #include <list>
 
 class TemplateProjectApp : public ci::app::AppNative,JoyController {
 	Player player;
 	GameCamera camera1 = GameCamera(player.GetPos());
+	UI uiCamera;
 	std::list<Boid> boids;
 	std::list<Bullet> bullets;
 
-	ci::CameraOrtho ui_camera;
-
 	// template
 	ci::Color color = ci::Color(0.f, 0.f, 0.f);
+
+	int enemyMaxNum = 100;
+	int shotTime = 0;
 
 public:
 	void prepareSettings(Settings* settings);

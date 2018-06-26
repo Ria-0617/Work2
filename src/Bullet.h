@@ -14,6 +14,14 @@ private:
 public:
 	Bullet(ci::Vec3f playerPos, ci::Matrix44f m);
 
+	ci::Vec3f GetPosition() {
+		return position;
+	}
+
+	float GetRadius() {
+		return radius;
+	}
+
 	void UpDate();
 	void Draw();
 	bool isDead();

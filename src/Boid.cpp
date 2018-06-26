@@ -4,11 +4,15 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-Boid::Boid() :radius(1.f), viewAngleRange(toRadians(45.f)), viewDistanceRange(5.f) {
+Boid::Boid() :radius(1.f), viewAngleRange(toRadians(45.f)), viewDistanceRange(10.f) {
 	position = Vec3f(randFloat(-50.f, 50.f), randFloat(-50.f, 50.f), randFloat(-50.f, 50.f));
 
 	angle = MyFanc::ToRadians(Vec3f(0, 0, randFloat(0.f, 360.f)));
 	direction = Matrix44f::createRotation(angle) * Vec3f(0.f, 1.f, 0.f);
+}
+
+Boid::Boid(Vec3f pos) :Boid() {
+	position = pos;
 }
 
 bool Boid::OutOfViewRange(Boid& boid, float viewAngleRange, float viewDistanceRange) {
@@ -104,9 +108,7 @@ void Boid::MoveLimit() {
 }
 
 void Boid::UpDate(ci::Vec3f pos, float rad) {
-	if (MyFanc::CircleCollider(position, radius, pos, rad)) {
-		MyFanc::Console("AAA");
-	}
+
 }
 
 void Boid::Draw() {

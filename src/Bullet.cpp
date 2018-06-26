@@ -22,4 +22,3 @@ void Bullet::Draw() {
 bool Bullet::isDead() {
 	return surviveTime <= 0;
 }
-

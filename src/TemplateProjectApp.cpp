@@ -9,15 +9,13 @@ void TemplateProjectApp::prepareSettings(Settings* settings) {
 
 void TemplateProjectApp::setup()
 {
-	camera1.SetUp(getWindowWidth(),getWindowHeight());
+	camera1.SetUp(getWindowWidth(), getWindowHeight());
 
-	for (int i = 1; i < 75; ++i) {
+	for (int i = 1; i < 50; ++i) {
 		boids.push_back(Boid());
 	}
 
-	ui_camera = CameraOrtho(0.f, (float)getWindowWidth(), (float)getWindowHeight(), 0.f, -1.f, 1.f);
-	ui_camera.setEyePoint(Vec3f(0.f, 0.f, 0.f));
-	ui_camera.setCenterOfInterestPoint(Vec3f(0.f, 0.f, -1.f));
+	uiCamera.SetUp(getWindowWidth(), getWindowHeight());
 
 	gl::enableAlphaBlending();
 	gl::enable(GL_COLOR_MATERIAL);
@@ -37,17 +35,31 @@ void TemplateProjectApp::update()
 		itr->MoveLimit();
 	}
 
-	if (IsPressedButton(R1))
-		bullets.push_back(Bullet(player.GetPos(),camera1.GetMatrix()));
 
-	for (auto iter = bullets.begin(); iter != bullets.end();) {
-		iter->UpDate();
-		if (iter->isDead())
-			iter = bullets.erase(iter);
-		else
-			++iter;
+	if (IsPressedButton(R1)) {
+		shotTime += 1;
+		if (shotTime % 5 == 0)
+			bullets.push_back(Bullet(player.GetPos(), camera1.GetMatrix()));
 	}
+	else
+		shotTime = 0;
 
+	for (auto itr = bullets.begin(); itr != bullets.end();) {
+		itr->UpDate();
+		if (itr->isDead())
+			itr = bullets.erase(itr);
+		else
+			++itr;
+
+		// ‹Ê‚Æ“G‚Ì“–‚½‚è”»’è
+		for (auto itr2 = boids.begin(); itr2 != boids.end(); ++itr2) {
+			if (MyFanc::CircleCollider(itr->GetPosition(), itr->GetRadius(), itr2->GetPosition(), itr2->GetRadius())) {
+				itr = bullets.erase(itr);
+				if (boids.size() > enemyMaxNum)continue;
+				boids.push_back(Boid(itr2->GetPosition()));
+			}
+		}
+	}
 	//console() << camera1.GetMatrix() << std::endl;
 }
 
@@ -77,13 +89,13 @@ void TemplateProjectApp::draw()
 
 	player.Draw();
 
-	for (auto itr = boids.begin(); itr != boids.end(); ++itr) {
+	// ‹Ê
+	for (auto itr = bullets.begin(); itr != bullets.end(); ++itr) {
 		itr->Draw();
 	}
 
-	// ‹Ê
-	for (auto iter = bullets.begin(); iter != bullets.end(); ++iter) {
-		iter->Draw();
+	for (auto itr = boids.begin(); itr != boids.end(); ++itr) {
+		itr->Draw();
 	}
 
 #pragma region disable
@@ -93,8 +105,7 @@ void TemplateProjectApp::draw()
 	//gl::disable(GL_LIGHTING);
 #pragma endregion
 
-	gl::color(Color(1.f, 1.f, 1.f));
-	gl::setMatrices(ui_camera);
+	uiCamera.Draw();
 }
 
 CINDER_APP_NATIVE(TemplateProjectApp, RendererGl)

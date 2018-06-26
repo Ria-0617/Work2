@@ -3,7 +3,7 @@
 using namespace ci;
 using namespace ci::app;
 
-Player::Player() :scale(Vec3f(1.f, 1.f, 1.f)) {
+Player::Player() :scale(Vec3f(1.f, 1.f, 1.f)),limitPositoin(Vec3f(50.f, 50.f, 50.f)) {
 	position = Vec3f(0.f, 0.f, 0.f);
 	prevPosition = position;
 	direction = Vec3f(0.f, 0.f, 0.f);
@@ -20,8 +20,11 @@ void Player::UpDate(Matrix44f m) {
 	}
 
 	// ˆÚ“®
-	if (IsMove(/*minValue = */0.25f,joy.dwXpos, joy.dwYpos))
+	if (IsMove(/*minValue = */0.25f, joy.dwXpos, joy.dwYpos)) {
 		position += m * Vec3f(StickValue(joy.dwXpos), 0.f, StickValue(joy.dwYpos))  * speed;
+
+		position = MyFanc::Vec3fClamp(position, -limitPositoin, limitPositoin);
+	}
 }
 
 void Player::Draw() {

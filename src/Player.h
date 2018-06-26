@@ -3,6 +3,7 @@
 #include "cinder/gl/gl.h"
 
 #include "JoyController.h"
+#include "Func.h"
 
 #include <list>
 
@@ -14,6 +15,8 @@ private:
 	float speed;
 
 	const ci::Vec3f scale;
+	const ci::Vec3f limitPositoin;
+
 public:
 	Player();
 
