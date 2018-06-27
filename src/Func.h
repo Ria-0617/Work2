@@ -32,3 +32,4 @@ namespace MyFanc {
 		return pos.distance(pos2) < radius + radius2 ? true : false;
 	}
 }
+
